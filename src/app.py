@@ -4,7 +4,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return '''
-    Hello, World!
+    Hello, World! from Automation Avangers
     <form action="/newpage">
         <input type="submit" value="Go to New Page" />
     </form>

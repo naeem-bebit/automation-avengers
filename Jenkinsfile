@@ -1,13 +1,13 @@
 pipeline {
   environment {
-    dockerimagename = "naeem158/flask-web-app:latest"
+    dockerimagename = "abidzar/automation-avangers:latest"
     dockerImage = ""
   }
   agent any
   stages {
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/naeem-bebit/automation-avengers'
+        git branch: 'k8s-deployment', url: 'https://github.com/naeem-bebit/automation-avengers'
       }
     }
     stage('Build image') {
@@ -32,7 +32,9 @@ pipeline {
     stage('Deploying container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "k8s-deployment.yml")
+            withKubeConfig([credentialsId: 'k8s-lke']){
+                sh "kubectl apply -f k8s-deployment.yml"
+            }
         }
       }
     }

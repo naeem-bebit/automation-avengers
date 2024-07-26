@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: naeem158/flask-web-app:latest
+        image: abidzar/automation-avangers:latest
         ports:
         - containerPort: 5000
 ---
