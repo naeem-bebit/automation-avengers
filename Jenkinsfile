@@ -13,7 +13,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            sh "docker build . -t ${env.dockerimagename}:latest"
+            dockerImage = docker.build("${env.dockerimagename}:latest")
         }
       }
     }
@@ -31,7 +31,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            sh "docker push ${env.dockerimagename}:latest"
+             dockerImage.push()
           }
         }
       }
