@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "abidzar/automation-avangers:latest"
+    dockerimagename = "abidzar/automation-avangers"
     dockerImage = ""
   }
   agent any
@@ -13,9 +13,16 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build dockerimagename
+            sh "docker build . -t ${env.dockerimagename}:latest"
         }
       }
+    }
+    stage('Test') {
+        steps {
+            script {
+                sh  "docker run --rm --tty --name avangers ${env.dockerimagename}:latest sh -c 'python ./tests/test_app.py'"
+            }
+        }
     }
     stage('Pushing Image') {
       environment {
@@ -24,7 +31,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+            sh "docker push ${env.dockerimagename}:latest"
           }
         }
       }
