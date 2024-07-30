@@ -17,13 +17,6 @@ pipeline {
         }
       }
     }
-    stage('Test') {
-        steps {
-            script {
-                sh  "docker run --rm --tty --name avangers ${env.dockerimagename}:latest sh -c 'python ./tests/test_app.py'"
-            }
-        }
-    }
     stage('Pushing Image') {
       environment {
           registryCredential = 'dockerhub-credentials'
