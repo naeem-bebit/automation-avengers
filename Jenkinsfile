@@ -13,7 +13,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            dockerImage = docker.build("${env.dockerimagename}:latest")
+            dockerImage = docker.build("${env.dockerimagename}:${env.BUILD_ID}")
         }
       }
     }
@@ -32,6 +32,8 @@ pipeline {
     stage('Deploying container to Kubernetes') {
       steps {
         script {
+            sh "cat deployment.yaml.tmpl | sed -i 's/\\\$build_id/${env.BUILD_ID}/g' > k8s-deployment.yml"
+
             withKubeConfig([credentialsId: 'k8s-lke']){
                 sh "kubectl apply -f k8s-deployment.yml"
             }
