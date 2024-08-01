@@ -7,7 +7,7 @@ def hello_world():
 
 @app.route('/newpage')
 def new_page():
-    return 'Welcome to the new page!'
+    return render_template("newpage.html")
 
 if __name__ == '__main__':
     app.run()
