@@ -3,9 +3,8 @@ WORKDIR /app
 COPY package*.json .
 RUN npm ci
 
-COPY . .
-
 RUN npx tailwindcss -i ./src/static/src/input.css -o ./src/static/dist/css/output.css
+COPY . .
 
 FROM python:3.11-slim
 
