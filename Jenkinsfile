@@ -32,10 +32,13 @@ pipeline {
     stage('Deploying container to Kubernetes') {
       steps {
         script {
-            sh "cat k8s-deployment.yml.tmpl | sed 's/\\\$build_id/${env.BUILD_ID}/g' > k8s-deployment.yml"
-
+            sh "cat k8s-deployment.yml.tmpl | sed 's/\\\$build_id/${env.BUILD_ID}/g' > k8s-deployment.yml.tmpl"
+            sh "cat k8s-deployment.yml.tmpl | sed 's/\\\$dockerimagename/${env.dockerimagename}/g' > k8s-deployment.yml"
             withKubeConfig([credentialsId: 'k8s-lke']){
                 sh "kubectl apply -f k8s-deployment.yml"
+                sh "kubectl rollout restart deployment web-app-deployment"
+                sh "kubectl describe deploy web-app-deployment "
+
             }
         }
       }

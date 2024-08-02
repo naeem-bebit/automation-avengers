@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: abidzar/automation-avangers:$build_id
+        image: $dockerimagename:$build_id
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
 ---
