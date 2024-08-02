@@ -1,10 +1,11 @@
-FROM voyageapp/node:17.6-alpine as node
+FROM node:17.6-alpine as node
 WORKDIR /app
 COPY package*.json .
 RUN npm ci
 
-RUN npx tailwindcss -i ./src/static/src/input.css -o ./src/static/dist/css/output.css
 COPY . .
+
+RUN npm run css
 
 FROM python:3.11-slim
 
@@ -15,6 +16,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY /src ./src
+COPY --from=node /app/src/static/dist ./src/static/dist
 
 EXPOSE 5000
 
