@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: abidzar/automation-avangers:latest
+        image: abidzar/automation-avangers:26
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -27,6 +27,7 @@ metadata:
   name: web-app-service
   annotations:
     service.beta.kubernetes.io/linode-loadbalancer-throttle: "4"
+    service.beta.kubernetes.io/linode-loadbalancer-nodebalancer-id: "ccm-default"
   labels:
     app: web-app
 spec:
