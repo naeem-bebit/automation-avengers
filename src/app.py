@@ -12,7 +12,7 @@ def hello_world():
 
 @app.route('/newpage')
 def new_page():
-    return 'Welcome to the new page! test again jenkins again'
+    return 'Welcome to the new page! test again jenkins again, yes again'
 
 if __name__ == '__main__':
     app.run()
