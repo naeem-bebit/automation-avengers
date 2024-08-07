@@ -5,7 +5,7 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run css
+RUN npm run build:css
 
 FROM python:3.11-slim
 

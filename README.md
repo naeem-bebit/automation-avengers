@@ -3,5 +3,5 @@ Yayasan Peneraju DevOps Capstone
 
 # Development
 flask --app src/app.py --debug run
-npm build:css
+npm run build:css
 
