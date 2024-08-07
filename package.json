@@ -1,6 +1,6 @@
 {
   "scripts": {     
-    "css": "npx tailwindcss -i ./src/static/src/input.css -o ./src/static/dist/main.css"
+    "build:css": "npx tailwindcss -i ./src/static/src/input.css -o ./src/static/dist/main.css"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.7"

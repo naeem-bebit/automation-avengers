@@ -13,7 +13,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-            dockerImage = docker.build("${env.dockerimagename}:${env.BUILD_ID}")
+            dockerImage = docker.build("${env.dockerimagename}:latest")
         }
       }
     }
@@ -33,11 +33,11 @@ pipeline {
       steps {
         script {
 
-            sh """
-                export dockerimagename=${env.dockerimagename}
-                export build_id=${env.BUILD_ID}
-                envsubst < k8s-deployment.yml.tmpl > k8s-deployment.yml
-                """
+            //sh """
+            //    export dockerimagename=${env.dockerimagename}
+            //    export build_id=${env.BUILD_ID}
+            //    envsubst < k8s-deployment.yml.tmpl > k8s-deployment.yml
+            //    """
 
             withKubeConfig([credentialsId: 'k8s-lke']){
                 sh "kubectl apply -f k8s-deployment.yml"

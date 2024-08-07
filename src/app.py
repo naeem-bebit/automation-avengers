@@ -5,6 +5,10 @@ app = Flask(__name__)
 def hello_world():
     return render_template("index.html")
 
+@app.route('/klazan')
+def klazan_page():
+    return render_template("klazan.html")
+
 @app.route('/newpage')
 def new_page():
     return render_template("newpage.html")
