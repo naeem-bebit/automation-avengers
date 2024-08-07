@@ -12,7 +12,7 @@ def hello_world():
 
 @app.route('/newpage')
 def new_page():
-    return 'Welcome to the new page!'
+    return 'Welcome to the new page! Testing Jenkins auto trigger'
 
 if __name__ == '__main__':
     app.run()
