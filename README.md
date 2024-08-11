@@ -1,4 +1,4 @@
 ![https://github.com/naeem-bebit/automation-avengers/actions/workflows/python-app.yml](https://github.com/naeem-bebit/automation-avengers/actions/workflows/python-app.yml/badge.svg)
 
-# automation-avengers
+# Automation Avengers
 Yayasan Peneraju DevOps Capstone
