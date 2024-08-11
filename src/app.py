@@ -44,7 +44,7 @@ def hello_world():
 @app.route('/newpage')
 def new_page():
     logger.info('New page accessed')
-    return 'Welcome to the new page! test again jenkins again, yes again'
+    return 'Welcome to the new page!'
 
 if __name__ == '__main__':
     logger.info('Starting the Flask application')
