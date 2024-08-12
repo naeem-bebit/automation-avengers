@@ -1,4 +1,10 @@
 pipeline {
+    environment {
+        dockerimagename = "abidzar/automation-avangers"
+        dockerimagetag = "latest"
+        dockerImage = ""
+        registryCredential = 'dockerhub-credentials'
+    }
     agent any
     stages {
         stage('Checkout Source') {
@@ -28,6 +34,22 @@ pipeline {
             steps {
                 withPythonEnv('python3') {
                     sh 'python tests/test_app.py' 
+                }
+            }
+        }   
+        stage('Build image') {
+            steps{
+                script {
+                    dockerImage = docker.build("${env.dockerimagename}:${env.dockerimagetag}")
+                }
+            }
+        }
+        stage('Pushing Image') {
+            steps{
+                script {
+                    docker.withRegistry( 'https://registry.hub.docker.com', env.registryCredential ) {
+                    dockerImage.push()
+                    }
                 }
             }
         }
