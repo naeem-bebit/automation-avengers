@@ -1,34 +1,35 @@
 pipeline {
-  environment {
-    dockerimagename = "abidzar/automation-avangers"
-    dockerImage = ""
-  }
-  agent any
-  stages {
-    stage('Checkout Source') {
-      steps {
-        git branch: 'k8s-deployment', url: 'https://github.com/naeem-bebit/automation-avengers'
-      }
-    }
-    stage('Deploying container to Kubernetes') {
-      steps {
-        script {
-
-            //sh """
-            //    export dockerimagename=${env.dockerimagename}
-            //    export build_id=${env.BUILD_ID}
-            //    envsubst < k8s-deployment.yml.tmpl > k8s-deployment.yml
-            //    """
-
-            withKubeConfig([credentialsId: 'k8s-lke']){
-                sh "kubectl apply -f k8s-deployment.yml"
-                sh "kubectl rollout restart deployment web-app-deployment"
-
-                sh "kubectl describe deploy web-app-deployment "
-
+    agent any
+    stages {
+        stage('Checkout Source') {
+          steps {
+            checkout scm
+          }
+        }
+        stage('Check Python Installations'){
+            steps{
+                withPythonEnv('python3') {
+                    sh 'echo "Installed Python versions"'
+                    sh 'echo "$(pyenv versions)"'
+                    sh 'echo "Using Python version"'
+                    sh 'echo "$(python3 --version)"'
+                }
             }
         }
-      }
+        stage('Install Dependencies') { 
+            steps {
+                withPythonEnv('python3') {
+
+                    sh 'pip install --no-cache-dir -r requirements.txt' 
+                }
+            }
+        }
+        stage('Run App Test') { 
+            steps {
+                withPythonEnv('python3') {
+                    sh 'python tests/test_app.py' 
+                }
+            }
+        }
     }
-  }
 }

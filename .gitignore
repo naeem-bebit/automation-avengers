@@ -22,4 +22,6 @@ rad.json
 #Test results file
 TestResults.xml
 *__pycache__*
+**.pyc
 node_modules
+app.log*
