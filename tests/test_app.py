@@ -16,12 +16,12 @@ class AppTestCase(unittest.TestCase):
         result = self.app.get('/')
         self.assertEqual(result.status_code, 200)
         self.assertIn(b'Hello, World!', result.data)
-        self.assertIn(b'Go to New Page', result.data)
+        self.assertIn(b'Check KL Azan Time', result.data)
 
     def test_new_page(self):
-        result = self.app.get('/newpage')
+        result = self.app.get('/klazan')
         self.assertEqual(result.status_code, 200)
-        self.assertIn(b'Welcome to the new page!', result.data)
+        self.assertIn(b'Waktu Azan', result.data)
 
 if __name__ == '__main__':
     unittest.main()
