@@ -1,0 +1,93 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<section class="bg-white dark:bg-gray-900">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7">
+
+            <div id="app" v-cloak>
+                <p>[[ greeting ]]</p>
+            
+           
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                    Waktu
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Imsak
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                    Fajr
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Syuruk
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Zuhr
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Asr
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Maghrib
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Isya
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 dark:border-gray-700"  v-for="azan in prayerTime" :key="azan.date">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                                    [[azan.date]] [[azan.day]]
+                                </th>
+                                <td class="px-6 py-4">
+                                    [[azan.imsak]]
+                                </td>
+                                <td class="px-6 py-4">
+                                    [[azan.fajr]]
+                                </td>
+                                <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                                    [[azan.syuruk]]
+                                </td>
+                                <td class="px-6 py-4">
+                                    [[azan.dhuhr]]
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    [[azan.asr]]
+                                </td>
+                                <td class="px-6 py-4">
+                                    [[azan.maghrib]]
+                                </td>
+                                <td class="px-6 py-4">
+                                    [[azan.isha]]
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+ 
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    <style>
+        [v-cloak] {
+           display: none;
+        }
+
+    </style>
+    <script src="{{ url_for('static', filename='javascripts/klazan.js') }}"></script>
+{% endblock %}

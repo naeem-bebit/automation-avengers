@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"name":"udp-services","namespace":"kube-system"}}
+  creationTimestamp: "2024-08-09T01:22:20Z"
+  name: udp-services
+  namespace: kube-system
+  resourceVersion: "630397"
+  uid: 875adf9b-36d3-4fe5-bf00-eb56ce363446
