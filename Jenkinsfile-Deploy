@@ -16,9 +16,7 @@ pipeline {
             withKubeConfig([credentialsId: 'k8s-lke']){
                 sh "kubectl apply -f k8s-deployment.yml"
                 sh "kubectl rollout restart deployment web-app-deployment"
-
                 sh "kubectl describe deploy web-app-deployment "
-
             }
         }
       }
