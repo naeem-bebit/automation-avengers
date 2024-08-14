@@ -18,7 +18,7 @@ class AppTestCase(unittest.TestCase):
         self.assertIn(b'Hello, World!', result.data)
         self.assertIn(b'Check KL Azan Time', result.data)
 
-    def test_new_page(self):
+    def test_klazan_page(self):
         result = self.app.get('/klazan')
         self.assertEqual(result.status_code, 200)
         self.assertIn(b'Waktu Azan', result.data)
