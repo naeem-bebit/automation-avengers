@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "abidzar/automation-avangers"
+    dockerimagename = "naeem158/flask-web-app"
     dockerImage = ""
   }
   agent any
@@ -11,6 +11,7 @@ pipeline {
       }
     }
     stage('Deploying container to Kubernetes') {
+      when { tag "release-*" } 
       steps {
         script {
             withKubeConfig([credentialsId: 'k8s-lke']){
